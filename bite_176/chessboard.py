@@ -2,6 +2,8 @@ WHITE, BLACK = ' ', '#'
 
 
 def create_chessboard(size=8):
-    """Create a chessboard with of the size passed in.
-       Don't return anything, print the output to stdout"""
-    pass
+   for x in range(size):
+      if x % 2 == 0:
+         print(" #" *(size // 2))
+      else:
+         print("# " *(size // 2))
