@@ -11,7 +11,12 @@ PYBITES = "pybites"
 def convert_pybites_chars(text):
     """Swap case all characters in the word pybites for the given text.
        Return the resulting string."""
-    for ele in text:
-        for char in ele:
-            if char in PYBITES:
-                "{char}".format(char.lower())
+    new = ""
+
+    for char in text:
+        if char.lower() in PYBITES:
+            new += (char.swapcase())
+        else:
+            new += (char)
+        
+    return new
