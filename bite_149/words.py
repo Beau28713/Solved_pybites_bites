@@ -10,7 +10,7 @@ Could you complete the function below to do this for him? So the result would be
 ['a', 'a', 'almost', 'and', 'and', 'Christmas', 'Happy', 'Holidays', "It's", 'Merry', 'PyBites', 'wishes', 'You', '2019']
 """
 
-def sort_words_case_insensitively(words):
+def sort_words_case_insensitively(words: list)-> list:
     """Sort the provided word list ignoring case, and numbers last
     (1995, 19ab = numbers / Happy, happy4you = strings, hence for
      numbers you only need to check the first char of the word)
