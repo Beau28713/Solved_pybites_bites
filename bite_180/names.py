@@ -4,7 +4,6 @@ Code group_names_by_country, looping through the list, returning a collections.d
 """
 
 from collections import defaultdict
-from pprint import pprint
 from itertools import groupby
 
 # fake data from https://www.mockaroo.com
@@ -29,5 +28,13 @@ def group_names_by_country(data: str = data) -> defaultdict:
     group_itter = groupby(data_list[1:], lambda x: x[2])
 
     for key, group in group_itter:
-        key_and_group = {key: list(group)}
-        pprint(key_and_group)
+        for thing in group: # group is a list of list
+            r = reversed(thing)
+            y = ' '.join(r)
+
+            if thing[2] in countries:
+                countries[thing[2]].insert(0, y[3:])
+            else:
+                countries[thing[2]].insert(0, y[3:])
+
+    return countries
