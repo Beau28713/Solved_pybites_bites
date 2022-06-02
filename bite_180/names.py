@@ -31,10 +31,6 @@ def group_names_by_country(data: str = data) -> defaultdict:
         for thing in group: # group is a list of list
             r = reversed(thing)
             y = ' '.join(r)
-
-            if thing[2] in countries:
-                countries[thing[2]].insert(0, y[3:])
-            else:
-                countries[thing[2]].insert(0, y[3:])
+            countries[thing[2]].insert(0, y[3:])
 
     return countries
