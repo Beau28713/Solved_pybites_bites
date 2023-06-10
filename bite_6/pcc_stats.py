@@ -68,9 +68,12 @@ def diehard_pybites(files=None):
     if files is None:
         files = gen_files()
     counter = Counter(files)
-    pprint(counter)
 
-    users = Counter()
-    popular_challenges = Counter()
+    chall = [x[:2] for x in counter.keys() if x[3:] not in IGNORE]
+    
+    pop_user = [x[3:] for x in counter.keys() if x[3:] not in IGNORE]
 
-    # your code
+    users = Counter(pop_user)
+    popular_challenges = Counter(chall)
+
+    return Stats(users.most_common(1)[0][0],popular_challenges.most_common(1)[0])
