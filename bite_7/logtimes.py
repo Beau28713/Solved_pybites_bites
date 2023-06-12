@@ -10,7 +10,7 @@ You can assume the log is sorted in ascending order. Check out each function's d
 Good luck, keep calm, and code in Python!
 """
 
-from datetime import datetime
+from datetime import datetime, timedelta
 import os
 import urllib.request
 from pprint import pprint
@@ -40,13 +40,13 @@ def convert_to_datetime(line):
        returns:
        datetime(2014, 7, 3, 23, 27, 51)
     """
-    match_str = []
-    for date_line in loglines:
-        match_str.append(re.search(r'\d{4}-\d{2}-\d{2}', date_line))
-    #res = datetime.strptime(match_str.group(), '%Y-%m-%d').date()
+    t = re.sub("T", " ", line)
 
-    pprint(match_str)
+    match_str = (re.search(r'\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}', t))
 
+    res = datetime.strptime(match_str.group(), '%Y-%m-%d %H:%M:%S')
+
+    return res
 
 def time_between_shutdowns(loglines):
     """TODO 2:
@@ -54,4 +54,15 @@ def time_between_shutdowns(loglines):
        calculate the timedelta between the first and last one.
        Return this datetime.timedelta object.
     """
-    pass
+    shutdown = []
+
+    for line in loglines:
+        if re.search(r"Shutdown initiated", line):
+            shutdown.append(datetime.strptime(re.search(r"\d{2}:\d{2}:\d{2}",line).group(), "%H:%M:%S"))
+
+    delta_1 = timedelta(hours=shutdown[0].hour, minutes=shutdown[0].minute, seconds=shutdown[0].second)
+    delta_2 = timedelta(hours=shutdown[1].hour, minutes=shutdown[1].minute, seconds=shutdown[1].second)
+
+    delta_change = delta_2 - delta_1
+
+    return delta_change
