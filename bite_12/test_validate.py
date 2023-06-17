@@ -16,4 +16,4 @@ def test_get_secret_token():
     with pytest.raises(UserNoPermission):
         get_secret_token('Julian')
 
-    """ assert get_secret_token('PyBites') == SECRET """
+    assert get_secret_token('PyBites') == SECRET
