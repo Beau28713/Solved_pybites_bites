@@ -22,7 +22,5 @@ def dict2nt(dict_):
 def nt2json(nt):
     f = nt._asdict()
     g = json.dumps(f, indent=4, sort_keys=True, default=str)
-    return g
 
-nt = dict2nt(blog)
-nt2json(nt)
+    return g
