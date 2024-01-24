@@ -23,12 +23,12 @@ def test_bites_not_done_start(promo):
     assert len(promo.bites_done) == 5
 
 
-""" @patch('random.choice', side_effect=[7, 9, 11])
+@patch('random.choice', side_effect=[7, 9, 11])
 @patch('random.sample', side_effect=[[7], [9], [11]])
 def test_new_bite(choice_mock, sample_mock, promo):
     assert promo.new_bite() == 7
     assert promo.new_bite() == 9
-    assert promo.new_bite() == 11 """
+    assert promo.new_bite() == 11
 
 
 def test_random_is_used(promo):
@@ -44,23 +44,23 @@ def test_pick_random_bite_returns_not_done_bite(promo):
         assert bite not in promo.bites_done
 
 
-""" def test_internal_data_structures(promo):
+def test_internal_data_structures(promo):
     # fixture = new data = start over
     assert len(promo.bites_done) == 5
     grab_bites(promo, amount=7)
     # bites_done incremented with 7
-    assert len(promo.bites_done) == 12 """
+    assert len(promo.bites_done) == 12
 
 
-""" def test_raise_exception_if_no_more_bites(promo):
+def test_raise_exception_if_no_more_bites(promo):
     assert len(promo.bites_done) == 5
     grab_bites(promo)
     # exhausted bites
     with pytest.raises(NoBitesAvailable):
-        promo._pick_random_bite() """
+        promo._pick_random_bite()
 
 
-""" def test_work_with_2_users_and_promo_instances(promo):
+def test_work_with_2_users_and_promo_instances(promo):
     alices_promo = Promo()
     grab_bites(alices_promo)
     assert len(alices_promo.bites_done) == 15
@@ -69,4 +69,4 @@ def test_pick_random_bite_returns_not_done_bite(promo):
         alices_promo.new_bite()
     # another user = new independent Promo instance
     bobs_promo = Promo()
-    assert len(bobs_promo.bites_done) == 5 """
+    assert len(bobs_promo.bites_done) == 5
