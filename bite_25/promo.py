@@ -32,15 +32,19 @@ class Promo:
     def _pick_random_bite(self):
         """Pick a random Bite that is not done yet, if all
            Bites are done, raise a NoBitesAvailable exception"""
-        
-        mystery_bite = random.choice(list(self.all_bites.keys()))
-        while mystery_bite in self.bites_done:
-            mystery_bite = random.choice(list(self.all_bites.keys()))
+        if len(self.all_bites) != len(self.bites_done):
+            self.mystery_bite = random.choice(list(self.all_bites.keys()))
+            while self.mystery_bite in self.bites_done:
+                self.mystery_bite = random.choice(list(self.all_bites.keys()))
 
-        return mystery_bite
+            return self.mystery_bite
+        else:
+            raise NoBitesAvailable
             
 
     def new_bite(self):
         """Get  a random Bite using _pick_random_bite,
            add it to self.bites_done, then return it"""
-        pass
+        new_bite = self._pick_random_bite()
+        self.bites_done.add(new_bite)
+        return new_bite
