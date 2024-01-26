@@ -24,7 +24,10 @@ def _get_dates():
 
 def convert_to_datetime(date_str):
     """Receives a date str and convert it into a datetime object"""
-    pass
+    s = " ".join(date_str.split(",")[1].split(" "))
+    print(s)
+    date_object = datetime.strptime(s, '%d %m %Y %I %M %S')
+    return date_object
 
 
 def get_month_most_posts(dates):
