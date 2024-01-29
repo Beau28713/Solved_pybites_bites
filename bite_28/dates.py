@@ -24,13 +24,11 @@ def _get_dates():
 
 def convert_to_datetime(date_str):
     """Receives a date str and convert it into a datetime object"""
-    s = " ".join(date_str.split(",")[1].split(" "))
-    print(s)
-    date_object = datetime.strptime(s, '%d %m %Y %I %M %S')
-    return date_object
-
+    s = date_str.split(" +")[0]
+    return datetime.strptime(s, '%a, %d %b %Y %H:%M:%S')
 
 def get_month_most_posts(dates):
     """Receives a list of datetimes and returns the month (format YYYY-MM)
        that occurs most"""
-    pass
+    d = [date.strftime("%Y-%m") for date in dates]
+    return collections.Counter(d).most_common(1)[0][0]
