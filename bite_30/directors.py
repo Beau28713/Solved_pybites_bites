@@ -22,9 +22,26 @@ def get_movies_by_director():
     """Extracts all movies from csv and stores them in a dict,
     where keys are directors, and values are a list of movies,
     use the defined Movie namedtuple"""
-    pass
+    movie_dict = defaultdict(list)
 
+    with open(MOVIE_DATA,"r", encoding='utf-8') as f:
+        file_reader = csv.DictReader(f)
+        for row in file_reader:
+            dir_name = row["director_name"]
+            title = row["movie_title"]
+            
+            if not row["title_year"]:
+                continue
+            year = int(row["title_year"])
+            
+            if year <= 1960:
+                continue
+            
+            score = float(row["imdb_score"])
+            movie_dict[dir_name].append(Movie(title=title, year=year, score=score))
 
+    return movie_dict
+    
 def calc_mean_score(movies):
     """Helper method to calculate mean of list of Movie namedtuples,
        round the mean to 1 decimal place"""
