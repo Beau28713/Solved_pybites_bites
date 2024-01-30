@@ -3,6 +3,8 @@ from collections import defaultdict, namedtuple
 import os
 from urllib.request import urlretrieve
 
+import statistics
+
 BASE_URL = 'https://bites-data.s3.us-east-2.amazonaws.com/'
 TMP = os.getenv("TMP", "/tmp")
 
@@ -45,7 +47,8 @@ def get_movies_by_director():
 def calc_mean_score(movies):
     """Helper method to calculate mean of list of Movie namedtuples,
        round the mean to 1 decimal place"""
-    pass
+    mean_score = round(statistics.mean([movie.score for movie in movies]), 1)
+    return mean_score
 
 
 def get_average_scores(directors):
@@ -53,4 +56,10 @@ def get_average_scores(directors):
        return a list of tuples (director, average_score) ordered by highest
        score in descending order. Only take directors into account
        with >= MIN_MOVIES"""
-    pass
+    g = []
+    for dir in directors:
+        if len(directors[dir]) < MIN_MOVIES:
+            continue
+        g.append((dir, (round(statistics.mean(list(x.score for x in directors[dir])), 1))))
+        
+    return sorted(g, key= lambda x: x[1], reverse= True)
