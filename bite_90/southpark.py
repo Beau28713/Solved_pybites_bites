@@ -18,4 +18,9 @@ def get_num_words_spoken_by_character_per_episode(content):
     """Receives loaded csv content (str) and returns a dict of
        keys=characters and values=Counter object,
        which is a mapping of episode=>words spoken"""
-    pass
+    ddict = defaultdict(list)
+    
+    d = [x for x in content.split()]
+    
+    for ele in d:
+        print(ele)
