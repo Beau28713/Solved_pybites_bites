@@ -2,6 +2,7 @@ from collections import Counter, defaultdict
 import csv
 
 import requests
+from pprint import pprint
 
 CSV_URL = 'https://raw.githubusercontent.com/pybites/SouthParkData/master/by-season/Season-{}.csv' # noqa E501
 
@@ -18,9 +19,8 @@ def get_num_words_spoken_by_character_per_episode(content):
     """Receives loaded csv content (str) and returns a dict of
        keys=characters and values=Counter object,
        which is a mapping of episode=>words spoken"""
-    ddict = defaultdict(list)
     
-    d = [x for x in content.split()]
+    reader = csv.DictReader(content.splitlines())
     
-    for ele in d:
-        print(ele)
+    for k in reader:
+        print(k)
