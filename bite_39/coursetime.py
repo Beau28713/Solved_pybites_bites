@@ -26,10 +26,18 @@ def get_all_timestamps() -> List[str]:
 
         Return a list of MM:SS timestamps
     """
-    pass
+    with open(COURSE_TIMES) as f:
+        data = f.read()
+        return re.findall(r'(\d+:\d+)', data)
 
 
 def calc_total_course_duration(timestamps) -> str:
     """Takes timestamps list as returned by get_all_timestamps
        and calculates the total duration as HH:MM:SS"""
-    pass
+    
+    total_seconds = 0
+    for timestamp in timestamps:
+        minutes, seconds = map(int, timestamp.split(':'))
+        total_seconds += minutes * 60 + seconds
+
+    return str(timedelta(seconds=total_seconds))
