@@ -1,6 +1,4 @@
-from contextlib import contextmanager
 
-@contextmanager
 class Account:
 
     def __init__(self):
