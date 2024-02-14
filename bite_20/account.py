@@ -14,6 +14,13 @@ class Account:
     def __sub__(self, amount):
         self._transactions.append(-amount)
 
-    # add 2 dunder methods here to turn this class 
-    # into a 'rollback' context manager
+    def __enter__(self):
+        self._copy = self._transactions.copy()
+        return self
+    
+    def __exit__(self, exc_type, exc_value, traceback):
+        if exc_value is not None or self.balance < 0:
+            self._transactions = self._copy
+            print('Rollback')
+        self._copy = None
     
