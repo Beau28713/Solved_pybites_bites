@@ -8,7 +8,9 @@ from bs4 import BeautifulSoup
 tmp = os.getenv("TMP", "/tmp")
 page = "us_holidays.html"
 holidays_page = os.path.join(tmp, page)
-urlretrieve(f"https://bites-data.s3.us-east-2.amazonaws.com/{page}", holidays_page)
+url = "https://bites-data.s3.us-east-2.amazonaws.com/"
+url += page
+urlretrieve(url, holidays_page)
 
 with open(holidays_page) as f:
     content = f.read()
