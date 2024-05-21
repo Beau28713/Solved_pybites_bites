@@ -1,16 +1,10 @@
-"""We already did the formatting for you, so just focus on completing stats using a combination of Python builtins and the statistics module.
-
-We retrieved this example from Python 3 Module of the Week (link provided upon resolving this Bite ...)
-
-Make sure you check out statistics docs while coding this Bite. Other than that, keep calm and code some stats in Python!
-"""
 import os
 import statistics
 from urllib.request import urlretrieve
 
 TMP = os.getenv("TMP", "/tmp")
-S3 = 'https://bites-data.s3.us-east-2.amazonaws.com/'
-DATA = 'testfiles_number_loc.txt'
+S3 = "https://bites-data.s3.us-east-2.amazonaws.com/"
+DATA = "testfiles_number_loc.txt"
 STATS = os.path.join(TMP, DATA)
 if not os.path.isfile(STATS):
     urlretrieve(os.path.join(S3, DATA), STATS)
@@ -35,10 +29,11 @@ Estimated variance for sample:
 
 def get_all_line_counts(data: str = STATS) -> list:
     """Get all 186 line counts from the STATS file,
-       returning a list of ints"""
-    line_count = 0
-    # TODO 1: get the 186 ints from downloaded STATS file
-    print(data)
+    returning a list of ints"""
+    # get the 186 ints from downloaded STATS file
+    with open(data) as f:
+        return [int(line.split()[0]) for line in f.readlines()]
+
 
 def create_stats_report(data=None):
     if data is None:
@@ -48,17 +43,27 @@ def create_stats_report(data=None):
     # taking a sample for the last section
     sample = list(data)[::2]
 
-    # TODO 2: complete this dict, use data list and
+    # complete this dict, use data list and
     # for the last 3 sample_ variables, use sample list
-    stats = dict(count=None,
-                 min_=None,
-                 max_=None,
-                 mean=None,
-                 pstdev=None,
-                 pvariance=None,
-                 sample_count=None,
-                 sample_stdev=None,
-                 sample_variance=None,
-                 )
+    stats = dict(
+        count=None,
+        min_=None,
+        max_=None,
+        mean=None,
+        pstdev=None,
+        pvariance=None,
+        sample_count=None,
+        sample_stdev=None,
+        sample_variance=None,
+    )
+    stats['count'] = len(data)
+    stats['min_'] = min(data)
+    stats['max_'] = max(data)
+    stats['mean'] = statistics.mean(data)
+    stats['pstdev'] = statistics.pstdev(data)
+    stats['pvariance'] = statistics.pvariance(data)
+    stats['sample_count'] = len(sample)
+    stats['sample_stdev'] = statistics.stdev(sample)
+    stats['sample_variance'] = statistics.variance(sample)
 
     return STATS_OUTPUT.format(**stats)

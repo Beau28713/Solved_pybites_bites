@@ -35,6 +35,6 @@ def test_get_all_line_counts():
     assert sum(counts) == 8135
 
 
-# @pytest.mark.parametrize("line", EXPECTED_OUTPUT.strip().splitlines())
-# def test_create_stats_report(report, line):
-#     assert line in report
+@pytest.mark.parametrize("line", EXPECTED_OUTPUT.strip().splitlines())
+def test_create_stats_report(report, line):
+    assert line in report
