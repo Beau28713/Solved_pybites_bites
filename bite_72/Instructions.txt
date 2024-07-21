@@ -1,0 +1,17 @@
+As you have probably seen on the dashboard you can now gain Ninja Belts based on the amount of points (or Bitecoins) you gained solving Bites, ranging from white (10 points) to red (1000 points).
+
+Complete the get_belt function below which receives a user_score, scores and belts.
+
+Based on the user's score, the function should return the corresponding belt name.
+
+For example with 162 points you would have the orange belt (not yet reached green = 175 points), 401 points gets you the brown belt, 999 is paneled, etc.
+
+Note that the scores are inclusive so if you have 10 points you have earned the white belt, ≥ 50 = yellow belt, etc.
+
+Also make sure you take the min and max boundaries into account:
+
+- Less than 10 there no belt in which case you have to return None.
+
+- In case of more than 1000 points you have the highest belt (red).
+
+Keep calm and code in Python!
