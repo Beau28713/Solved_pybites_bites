@@ -14,8 +14,8 @@ def list_to_decimal(nums: List[int]) -> int:
     """
     for num in nums:
         if isinstance(num, bool) or not isinstance(num, int):
-            raise TypeError
-        elif not num in range(0, 10):
-            raise ValueError
+            raise TypeError("All elements must be integers in the range 0-9")
+        elif num not in range(0, 10):
+            raise ValueError("All elements must be integers in the range 0-9")
 
     return int(''.join(map(str, nums)))
